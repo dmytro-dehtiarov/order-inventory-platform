@@ -45,7 +45,7 @@ More details: [`docs/architecture.md`](docs/architecture.md)
 ## Tech Stack
 - Java 17
 - Spring Boot 3 (Web, Validation, Security)
-- PostgreSQL
+- Oracle Database
 - JPA / Hibernate
 - Flyway (database migrations)
 - Docker & Docker Compose
@@ -56,9 +56,33 @@ More details: [`docs/architecture.md`](docs/architecture.md)
 ---
 
 ## Getting Started (Local)
-Requirements:
-- Java 17+
-- Docker
+
+### Option A: Quick start with Docker (recommended)
+Requirements: Java 17+, Docker
 
 ```bash
-docker compose up --build
+cp .env.example .env
+# edit .env: set DB_HOST=localhost, DB_PORT=1521,
+# DB_SERVICE=FREEPDB1, DB_USER and DB_PASSWORD of your choice
+
+docker compose up -d
+# wait ~60-90s for Oracle to initialize (check: docker compose logs -f oracle)
+
+./mvnw spring-boot:run
+```
+
+### Option B: Connect to an existing Oracle instance
+If you already have Oracle Database running (a college lab environment, a dedicated VM, a cloud
+instance), skip Docker entirely:
+
+```bash
+cp .env.example .env
+# fill in DB_HOST, DB_PORT, DB_SERVICE, DB_USER, DB_PASSWORD
+# for your existing instance
+
+./mvnw spring-boot:run
+```
+
+For a full from-scratch Oracle Linux VM setup (used during this project's development), see
+[`docs/oracle-vm-setup.md`](docs/oracle-vm-setup.md).
+
