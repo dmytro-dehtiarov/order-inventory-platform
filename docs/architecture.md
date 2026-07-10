@@ -97,7 +97,7 @@ Responsibilities:
 ---
 
 ## 6) Data Storage Strategy
-### PostgreSQL (primary)
+### Oracle Database (primary)
 Used for transactional consistency:
 - users / roles
 - products / categories
@@ -140,15 +140,18 @@ Documentation is provided via Swagger/OpenAPI.
 
 ## 9) Testing Strategy
 - **Unit tests** for business rules (services/use-cases)
-- **Integration tests** with Testcontainers (PostgreSQL)
+- **Integration tests** with Testcontainers (Oracle)
 - focus on verifying invariants (reserve/release logic, status transitions)
 
 ---
 
 ## 10) Deployment (Planned)
-- local: Docker Compose (app + postgres)
+- local: app + Oracle VM (connection configured via `.env`)
+  — Note: containerized Oracle option (docker-compose) planned separately
+    for portfolio distribution, so the project can run without access
+    to the author's VM.
 - CI/CD: Jenkins pipeline (build/test/package/docker)
-- cloud: AWS (RDS Postgres, ECS/EC2, S3, DynamoDB)
+- cloud: AWS (RDS Oracle, ECS/EC2, S3, DynamoDB)
 
 ---
 
@@ -158,3 +161,4 @@ Key decisions are tracked in:
 
 Example:
 - ADR-001: Modular Monolith architecture
+- ADR-002: Oracle Database as primary datastore
