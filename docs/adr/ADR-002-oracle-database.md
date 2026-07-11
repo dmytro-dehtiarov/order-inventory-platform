@@ -29,8 +29,9 @@ Migrate the primary datastore from PostgreSQL to **Oracle Database**:
 - schema migrations via `flyway-database-oracle`
 - Hibernate dialect: `org.hibernate.dialect.OracleDialect`
 - datasource connection details (host, port, service name, credentials) are supplied via
-  environment variables, loaded locally from a `.env` file (via `spring-dotenv`) and never
-  committed to source control — only `.env.example` (a template with no real values) is tracked
+  environment variables, loaded locally from a `.env` file via Spring Boot's built-in
+  `spring.config.import=optional:file:.env[.properties]` mechanism, and never committed to
+  source control — only `.env.example` (a template with no real values) is tracked
 - application connects to a schema on the already-provisioned Oracle VM rather than a local
   containerized database
 
