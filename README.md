@@ -44,12 +44,12 @@ More details: [`docs/architecture.md`](docs/architecture.md)
 
 ## Tech Stack
 - Java 17
-- Spring Boot 3 (Web, Validation, Security)
+- Spring Boot 4 (Web, Validation, Security)
 - Oracle Database
 - JPA / Hibernate
 - Flyway (database migrations)
 - Docker & Docker Compose
-- Testing: JUnit 5, Mockito, Testcontainers
+- Testing: JUnit 5, Mockito (integration tests against a dedicated Oracle test schema — see [`docs/architecture.md`](docs/architecture.md))
 - CI/CD: Jenkins (planned)
 - Cloud: AWS (planned – RDS, S3, DynamoDB)
 
