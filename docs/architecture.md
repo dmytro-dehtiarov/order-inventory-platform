@@ -140,7 +140,11 @@ Documentation is provided via Swagger/OpenAPI.
 
 ## 9) Testing Strategy
 - **Unit tests** for business rules (services/use-cases)
-- **Integration tests** with Testcontainers (Oracle)
+- **Integration tests** run against a dedicated **test schema on the same Oracle VM** used for local
+  development (per ADR-002), not Testcontainers — the Oracle Testcontainers image is heavy, and the
+  VM is already provisioned. All module integration tests extend a shared `AbstractIntegrationTest`
+  base class (`@SpringBootTest`, `test` profile pointing at the test schema); isolation is managed
+  via per-test `@Transactional` rollback plus Flyway clean/migrate per run
 - focus on verifying invariants (reserve/release logic, status transitions)
 
 ---

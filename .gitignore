@@ -33,6 +33,7 @@ replay_pid*
 /.settings/
 /.project
 /.classpath
+/.vs/
 
 # OS
 .DS_Store
