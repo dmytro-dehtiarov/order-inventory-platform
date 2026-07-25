@@ -20,4 +20,4 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: ./mvnw -B test -Dtest='!OrderInventoryPlatformApplicationTests'
+        run: ./mvnw -B test -Dtest='!OrderInventoryPlatformApplicationTests' -Dsurefire.failIfNoSpecifiedTests=false
