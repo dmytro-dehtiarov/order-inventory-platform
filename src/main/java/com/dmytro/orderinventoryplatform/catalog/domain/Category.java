@@ -7,6 +7,17 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.Instant;
 
 
+/**
+ * A product category, optionally nested under a parent category.
+ *
+ * <p>Carries no Bean Validation and no repository awareness: it only enforces
+ * the invariants that must hold regardless of how the entity is constructed
+ * (name must not be blank). Request-shape validation belongs to the API
+ * layer, and cross-entity invariants such as "hierarchy must stay acyclic"
+ * or "a category still referenced by children/products cannot be deleted"
+ * are enforced by the application layer, since they require querying other
+ * rows and cannot be checked from a single entity in isolation.
+ */
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -32,10 +43,22 @@ public class Category {
     @Column(name = "updated_at", nullable = false, updatable = true)
     private Instant updatedAt;
 
+    /**
+     * No-args constructor required by JPA/Hibernate to reconstruct entities
+     * from query results via reflection. Not intended for application code,
+     * hence {@code protected} rather than {@code public}.
+     */
     protected Category() {
 
     }
 
+    /**
+     * @param name a non-blank category name
+     * @param description an optional, free-text description
+     * @param parentCategory the parent category, or {@code null} for a
+     *                        top-level category
+     * @throws IllegalArgumentException if {@code name} is {@code null} or blank
+     */
     public Category(String name, String description, Category parentCategory) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name must not be blank");

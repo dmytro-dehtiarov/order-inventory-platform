@@ -7,6 +7,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * A sellable product, always assigned to exactly one {@link Category}.
+ *
+ * <p>Carries no Bean Validation and no repository awareness: it only enforces
+ * the invariants that must hold regardless of how the entity is constructed
+ * (name must not be blank, price must not be negative, category must be
+ * present). Request-shape validation belongs to the API layer.
+ */
 @Entity
 @Table(name = "products")
 public class Product {
@@ -38,10 +46,28 @@ public class Product {
     @Column(name = "updated_at", nullable = false, updatable = true)
     private Instant updatedAt;
 
+    /**
+     * No-args constructor required by JPA/Hibernate to reconstruct entities
+     * from query results via reflection. Not intended for application code,
+     * hence {@code protected} rather than {@code public}.
+     */
     protected Product() {
 
     }
 
+    /**
+     * @param name a non-blank product name
+     * @param description an optional, free-text description
+     * @param price the unit price; must not be {@code null} or negative
+     * @param category the category this product belongs to; required
+     * @param active whether the product is currently active/sellable;
+     *               required, since {@code active} is a primitive concern in
+     *               the database and callers must state it explicitly
+     * @throws IllegalArgumentException if {@code name} is blank, {@code price}
+     *                                   is {@code null} or negative, or
+     *                                   {@code category}/{@code active} is
+     *                                   {@code null}
+     */
     public Product (String name, String description, BigDecimal price, Category category, Boolean active) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name must not be blank");
