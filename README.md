@@ -35,6 +35,7 @@ The focus is on:
 - Database schema and migrations (Flyway, Oracle)
 - Domain entities for core modules (Catalog, Inventory, Orders)
 - Centralized exception handling
+- Architecture decisions documented as ADRs (modular monolith, Oracle persistence, JWT authentication)
 
 **In Progress / Planned:**
 - Identity & Security (JWT-based authentication, role-based access control: ADMIN, MANAGER)
