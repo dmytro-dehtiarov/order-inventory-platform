@@ -15,10 +15,10 @@ import org.springframework.stereotype.Repository;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     /**
-     * @param parentId the {@code id} of a category
-     * @return {@code true} if at least one category has {@code parentId} as
+     * @param parentCategoryId the {@code id} of a category
+     * @return {@code true} if at least one category has {@code parentCategoryId} as
      *         its parent; used as a delete guard so a category with children
      *         cannot be removed
      */
-    boolean existsByParentId(Long parentId);
+    boolean existsByParentCategoryId(Long parentCategoryId);
 }
