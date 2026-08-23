@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   unit-tests:
@@ -23,12 +24,14 @@ jobs:
         run: ./mvnw -B test -Dtest='!OrderInventoryPlatformApplicationTests' -DexcludedGroups=integration -Dsurefire.failIfNoSpecifiedTests=false
 
   integration-tests:
-    # Only ever runs on push to main, never on pull_request. This repo is
-    # public, and this job runs on a self-hosted runner with network access
-    # to the Oracle VM: letting it trigger from pull_request would let a
-    # fork's PR execute code on that runner. Restricting to push means only
-    # code already merged by me reaches it.
-    if: github.event_name == 'push'
+    # Never runs automatically on pull_request. This repo is public, and
+    # this job runs on a self-hosted runner with network access to the
+    # Oracle VM: letting it trigger from pull_request would let a fork's PR
+    # execute code on that runner. workflow_dispatch requires write access
+    # to this repo to invoke, so only I can trigger it, and I choose which
+    # branch to run it against (a PR branch, after reviewing the diff, or
+    # main after merge).
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: [self-hosted, oracle-vm]
     env:
       DB_HOST: localhost
