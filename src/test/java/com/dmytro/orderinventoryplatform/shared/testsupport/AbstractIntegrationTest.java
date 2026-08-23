@@ -1,5 +1,6 @@
 package com.dmytro.orderinventoryplatform.shared.testsupport;
 
+import org.junit.jupiter.api.Tag;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
  *       regardless of run order.</li>
  * </ul>
  *
+ * <p>Tagged {@code "integration"} so CI (which has no network access to the
+ * Oracle VM these tests connect to) can exclude every test extending this
+ * class in one place, without having to name each class individually in the
+ * CI workflow.
  */
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
+@Tag("integration")
 public abstract class AbstractIntegrationTest {
 }
