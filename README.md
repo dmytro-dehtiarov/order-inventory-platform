@@ -1,5 +1,9 @@
 # Order & Inventory Management Platform
 
+## Work in progress, actively building toward MVP
+
+![CI](https://github.com/dmytro-dehtiarov/order-inventory-platform/actions/workflows/ci.yml/badge.svg)
+
 Production-style Order & Inventory Management Platform built with **Java 17** and **Spring Boot**, designed to demonstrate real-world backend development practices including transactional business logic, layered architecture, and cloud-ready deployment.
 
 ## Project Goal
@@ -21,20 +25,24 @@ The focus is on:
   - Application (Services / Use Cases)
   - Domain (Entities, Business Rules)
   - Infrastructure (Persistence, External integrations)
+
+## Architecture Decisions
+  - Key design decisions are documented as ADRs in [`docs/`](docs/).
  
 ## Key Features (MVP)
-- Product and category management
-- Inventory tracking with stock reservation
-- Order lifecycle management (create, cancel)
-- Transactional consistency between orders and inventory
-- Role-based access (ADMIN, MANAGER)
-- REST API with validation and error handling
 
-Planned modules:
-- Identity & Security
-- Catalog
-- Inventory
-- Orders
+**Implemented:**
+- Database schema and migrations (Flyway, Oracle)
+- Domain entities for core modules (Catalog, Inventory, Orders)
+- Centralized exception handling
+- Architecture decisions documented as ADRs (modular monolith, Oracle persistence, JWT authentication)
+
+**In Progress / Planned:**
+- Identity & Security (JWT-based authentication, role-based access control: ADMIN, MANAGER)
+- Catalog (product and category management)
+- Inventory (stock tracking with reservation)
+- Orders (lifecycle management: create, cancel; transactional consistency with inventory)
+- REST API with validation and error handling
 - Audit (later)
 - Files & Reporting (later)
 
