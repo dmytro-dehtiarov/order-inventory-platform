@@ -58,7 +58,7 @@ More details: [`docs/architecture.md`](docs/architecture.md)
 - Flyway (database migrations)
 - Docker & Docker Compose
 - Testing: JUnit 5, Mockito (integration tests against a dedicated Oracle test schema — see [`docs/architecture.md`](docs/architecture.md))
-- CI/CD: Jenkins (planned)
+- CI/CD: GitHub Actions (unit tests on every push/PR, integration tests on a self-hosted runner via workflow_dispatch)
 - Cloud: AWS (planned – RDS, S3, DynamoDB)
 
 ---
