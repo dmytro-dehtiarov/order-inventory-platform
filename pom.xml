@@ -93,6 +93,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<!-- Exposes ${org.mockito:mockito-core:jar} as the resolved absolute
+				     path to that dependency's jar, so surefire can pass it to
+				     -javaagent below without hardcoding a version. -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>get-mockito-agent-jar</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>properties</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!-- Loads Mockito's byte-buddy agent explicitly at JVM startup
+					     instead of self-attaching at runtime, which newer JDKs warn
+					     about and will eventually block. -->
+					<argLine>-javaagent:${org.mockito:mockito-core:jar}</argLine>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
