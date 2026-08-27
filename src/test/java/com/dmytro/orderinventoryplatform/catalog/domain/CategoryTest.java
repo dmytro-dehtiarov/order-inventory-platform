@@ -34,4 +34,15 @@ public class CategoryTest {
             new Category("   ", "Book category", null);
         });
     }
+
+    @Test
+    void shouldThrowWhenSetNameToBlankOrNull() {
+        Category category = new Category("Books", "Book category", null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            category.setName(null);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            category.setName("   ");
+        });
+    }
 }
