@@ -124,4 +124,35 @@ public class Product {
         return updatedAt;
     }
 
+    public void setName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("name must not be blank");
+        }
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(BigDecimal price) {
+        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("price must not be negative");
+        }
+        this.price = price;
+    }
+
+    public void setCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("product must have a category");
+        }
+        this.category = category;
+    }
+
+    public void setActive(Boolean active) {
+        if (active == null) {
+            throw new IllegalArgumentException("product must have an active status");
+        }
+        this.active = active;
+    }
 }
