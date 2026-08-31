@@ -9,6 +9,7 @@ import com.dmytro.orderinventoryplatform.catalog.infrastructure.CategoryReposito
 import com.dmytro.orderinventoryplatform.catalog.infrastructure.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  * here would be pure ceremony (architecture.md reserves interfaces for
  * cases with more than one implementation).
  */
+@Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
