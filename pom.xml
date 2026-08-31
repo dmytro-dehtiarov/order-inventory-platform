@@ -54,6 +54,14 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-database-oracle</artifactId>
 		</dependency>
+		<dependency>
+			<!-- Generates an OpenAPI spec from the controllers/DTOs and serves a
+			     browsable Swagger UI at /swagger-ui.html - purely a documentation
+			     aid, no effect on the API itself. -->
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>3.0.3</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
