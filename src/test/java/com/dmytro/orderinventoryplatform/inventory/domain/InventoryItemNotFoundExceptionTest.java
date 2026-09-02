@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 public class InventoryItemNotFoundExceptionTest {
     @Test
     public void testInventoryItemNotFoundException() {
-        String message = "inventory item not found";
-        InventoryItemNotFoundException exception = new InventoryItemNotFoundException(message);
+        Long productId = 1L;
+        InventoryItemNotFoundException exception = new InventoryItemNotFoundException(productId);
 
-        Assertions.assertEquals(message, exception.getMessage());
+        Assertions.assertEquals("Inventory item not found for product ID: " + productId, exception.getMessage());
     }
 }

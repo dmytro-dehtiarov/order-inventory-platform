@@ -8,10 +8,10 @@ import com.dmytro.orderinventoryplatform.shared.domain.ResourceNotFoundException
  */
 public class InventoryItemNotFoundException extends ResourceNotFoundException {
     /**
-     * @param message a human-readable description of which product's
-     *                 inventory record could not be found
+     * @param productId the id of the product whose inventory record could
+     *                   not be found
      */
-    public InventoryItemNotFoundException(String message) {
-        super(message);
+    public InventoryItemNotFoundException(Long productId) {
+        super("Inventory item not found for product ID: " + productId);
     }
 }
