@@ -33,16 +33,16 @@ The focus is on:
 
 **Implemented:**
 - Database schema and migrations (Flyway, Oracle)
-- Domain entities for core modules (Catalog, Inventory, Orders)
+- Domain entities for core modules (Catalog, Inventory)
 - Centralized exception handling
 - Architecture decisions documented as ADRs (modular monolith, Oracle persistence, JWT authentication)
-
-**In Progress / Planned:**
-- Identity & Security (JWT-based authentication, role-based access control: ADMIN, MANAGER)
 - Catalog (product and category management)
 - Inventory (stock tracking with reservation)
-- Orders (lifecycle management: create, cancel; transactional consistency with inventory)
 - REST API with validation and error handling
+
+**In Progress / Planned:**
+- Orders (lifecycle management: create, cancel; transactional consistency with inventory)
+- Identity & Security (JWT-based authentication, role-based access control: ADMIN, MANAGER)
 - Audit (later)
 - Files & Reporting (later)
 
