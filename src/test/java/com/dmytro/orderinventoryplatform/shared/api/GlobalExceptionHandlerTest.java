@@ -1,6 +1,7 @@
 package com.dmytro.orderinventoryplatform.shared.api;
 
 import com.dmytro.orderinventoryplatform.shared.domain.ConflictException;
+import com.dmytro.orderinventoryplatform.shared.domain.InvalidInputException;
 import com.dmytro.orderinventoryplatform.shared.domain.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -51,6 +52,12 @@ class GlobalExceptionHandlerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.status").value(400));
     }
+    @Test
+    void invalidInputException_mapsTo400() throws Exception {
+        mockMvc.perform(get("/test-invalid-input"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail").value("Invalid input"));
+    }
 
     @RestController
     private static class TestController {
@@ -62,6 +69,10 @@ class GlobalExceptionHandlerTest {
         @GetMapping("/test-conflict")
         void triggerConflictException() {
             throw new ConflictException("Conflict occurred") {};
+        }
+        @GetMapping("/test-invalid-input")
+        void triggerInvalidInput() {
+            throw new InvalidInputException("Invalid input") {};
         }
         @PostMapping("/test-validation")
         void triggerValidation(@Valid @RequestBody TestRequest request) {
