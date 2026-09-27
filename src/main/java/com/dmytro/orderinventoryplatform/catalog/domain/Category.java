@@ -61,11 +61,11 @@ public class Category {
      * @param description an optional, free-text description
      * @param parentCategory the parent category, or {@code null} for a
      *                        top-level category
-     * @throws IllegalArgumentException if {@code name} is {@code null} or blank
+     * @throws InvalidCategoryException if {@code name} is {@code null} or blank
      */
     public Category(String name, String description, Category parentCategory) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("name must not be blank");
+            throw new InvalidCategoryException("name must not be blank");
         }
         this.name = name;
         this.description = description;
@@ -98,7 +98,7 @@ public class Category {
 
     public void setName(String name) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("name must not be blank");
+            throw new InvalidCategoryException("name must not be blank");
         }
         this.name = name;
     }

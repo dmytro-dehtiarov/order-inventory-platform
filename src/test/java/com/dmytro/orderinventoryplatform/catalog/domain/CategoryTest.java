@@ -23,14 +23,14 @@ public class CategoryTest {
 
     @Test
     void shouldThrowWhenNameIsNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(InvalidCategoryException.class, () -> {
             new Category(null, "Book category", null);
         });
     }
 
     @Test
     void shouldThrowWhenNameIsBlank() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(InvalidCategoryException.class, () -> {
             new Category("   ", "Book category", null);
         });
     }
@@ -38,10 +38,10 @@ public class CategoryTest {
     @Test
     void shouldThrowWhenSetNameToBlankOrNull() {
         Category category = new Category("Books", "Book category", null);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(InvalidCategoryException.class, () -> {
             category.setName(null);
         });
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(InvalidCategoryException.class, () -> {
             category.setName("   ");
         });
     }

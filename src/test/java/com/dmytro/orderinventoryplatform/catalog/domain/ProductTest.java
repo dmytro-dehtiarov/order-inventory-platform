@@ -39,32 +39,32 @@ public class ProductTest {
 
     @Test
     void shouldThrowWhenNameIsNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Product(null, "Product Description", new BigDecimal("29.99"), category, true));
+        Assertions.assertThrows(InvalidProductException.class, () -> new Product(null, "Product Description", new BigDecimal("29.99"), category, true));
     }
 
     @Test
     void shouldThrowWhenNameIsBlank() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("   ", "Product Description", new BigDecimal("29.99"), category, true));
+        Assertions.assertThrows(InvalidProductException.class, () -> new Product("   ", "Product Description", new BigDecimal("29.99"), category, true));
     }
 
     @Test
     void shouldThrowWhenPriceIsNegative() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("Product Name", "Product Description", new BigDecimal("-1.00"), category, true));
+        Assertions.assertThrows(InvalidProductException.class, () -> new Product("Product Name", "Product Description", new BigDecimal("-1.00"), category, true));
     }
 
     @Test
     void shouldThrowWhenPriceIsNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("Product Name", "Product Description", null, category, true));
+        Assertions.assertThrows(InvalidProductException.class, () -> new Product("Product Name", "Product Description", null, category, true));
     }
 
     @Test
     void shouldThrowWhenCategoryIsNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("Product Name", "Product Description", new BigDecimal("29.99"), null, true));
+        Assertions.assertThrows(InvalidProductException.class, () -> new Product("Product Name", "Product Description", new BigDecimal("29.99"), null, true));
     }
 
     @Test
     void shouldThrowWhenActiveIsNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Product("Product Name", "Product Description", new BigDecimal("29.99"), category, null));
+        Assertions.assertThrows(InvalidProductException.class, () -> new Product("Product Name", "Product Description", new BigDecimal("29.99"), category, null));
     }
 
     @Test
@@ -81,31 +81,31 @@ public class ProductTest {
 
     @Test
     void shouldThrowWhenUpdatingNameToNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> product.setName(null));
+        Assertions.assertThrows(InvalidProductException.class, () -> product.setName(null));
     }
 
     @Test
     void shouldThrowWhenUpdatingNameToBlank() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> product.setName("   "));
+        Assertions.assertThrows(InvalidProductException.class, () -> product.setName("   "));
     }
 
     @Test
     void shouldThrowWhenUpdatingPriceToNegative() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> product.setPrice(new BigDecimal("-1.00")));
+        Assertions.assertThrows(InvalidProductException.class, () -> product.setPrice(new BigDecimal("-1.00")));
     }
 
     @Test
     void shouldThrowWhenUpdatingPriceToNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> product.setPrice(null));
+        Assertions.assertThrows(InvalidProductException.class, () -> product.setPrice(null));
     }
 
     @Test
     void shouldThrowWhenUpdatingCategoryToNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> product.setCategory(null));
+        Assertions.assertThrows(InvalidProductException.class, () -> product.setCategory(null));
     }
 
     @Test
     void shouldThrowWhenUpdatingActiveToNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> product.setActive(null));
+        Assertions.assertThrows(InvalidProductException.class, () -> product.setActive(null));
     }
 }

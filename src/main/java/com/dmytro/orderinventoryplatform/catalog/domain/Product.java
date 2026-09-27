@@ -67,23 +67,23 @@ public class Product {
      * @param active whether the product is currently active/sellable;
      *               required, since {@code active} is a primitive concern in
      *               the database and callers must state it explicitly
-     * @throws IllegalArgumentException if {@code name} is blank, {@code price}
+     * @throws InvalidProductException if {@code name} is blank, {@code price}
      *                                   is {@code null} or negative, or
      *                                   {@code category}/{@code active} is
      *                                   {@code null}
      */
     public Product (String name, String description, BigDecimal price, Category category, Boolean active) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("name must not be blank");
+            throw new InvalidProductException("name must not be blank");
         }
         if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("price must not be negative");
+            throw new InvalidProductException("price must not be negative");
         }
         if (category == null) {
-            throw new IllegalArgumentException("product must have a category");
+            throw new InvalidProductException("product must have a category");
         }
         if (active == null) {
-            throw new IllegalArgumentException("product must have an active status");
+            throw new InvalidProductException("product must have an active status");
         }
         this.name = name;
         this.price = price;
@@ -126,7 +126,7 @@ public class Product {
 
     public void setName(String name) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("name must not be blank");
+            throw new InvalidProductException("name must not be blank");
         }
         this.name = name;
     }
@@ -137,21 +137,21 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("price must not be negative");
+            throw new InvalidProductException("price must not be negative");
         }
         this.price = price;
     }
 
     public void setCategory(Category category) {
         if (category == null) {
-            throw new IllegalArgumentException("product must have a category");
+            throw new InvalidProductException("product must have a category");
         }
         this.category = category;
     }
 
     public void setActive(Boolean active) {
         if (active == null) {
-            throw new IllegalArgumentException("product must have an active status");
+            throw new InvalidProductException("product must have an active status");
         }
         this.active = active;
     }
