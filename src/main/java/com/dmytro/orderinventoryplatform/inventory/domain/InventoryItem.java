@@ -38,12 +38,12 @@ public class InventoryItem {
     /**
      * @param id the id of the product this record tracks stock for
      * @param available the initial available quantity; must not be negative
-     * @throws IllegalArgumentException if {@code available} is negative
+     * @throws InvalidQuantityException if {@code available} is negative
      */
     public InventoryItem(Long id, int available) {
         this.id = id;
         if (available < 0) {
-            throw new IllegalArgumentException("Available quantity cannot be negative");
+            throw new InvalidQuantityException("Available quantity cannot be negative");
         }
         this.available = available;
         this.reserved = 0;
@@ -55,13 +55,13 @@ public class InventoryItem {
      * held against future orders.
      *
      * @param quantity the quantity to reserve; must be positive
-     * @throws IllegalArgumentException if {@code quantity} is not positive
+     * @throws InvalidQuantityException if {@code quantity} is not positive
      * @throws InsufficientStockException if {@code quantity} exceeds the
      *                                     currently available quantity
      */
     public void reserve(int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity to reserve must be more than zero");
+            throw new InvalidQuantityException("Quantity to reserve must be more than zero");
         }
         if (quantity > available) {
             throw new InsufficientStockException("Not enough stock available to reserve");
@@ -77,13 +77,13 @@ public class InventoryItem {
      * again.
      *
      * @param quantity the quantity to release; must be positive
-     * @throws IllegalArgumentException if {@code quantity} is not positive
+     * @throws InvalidQuantityException if {@code quantity} is not positive
      * @throws InsufficientStockException if {@code quantity} exceeds the
      *                                     currently reserved quantity
      */
     public void release(int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity to release must be more than zero");
+            throw new InvalidQuantityException("Quantity to release must be more than zero");
         }
         if (quantity > reserved) {
             throw new InsufficientStockException("Cannot release more than reserved quantity");
@@ -100,11 +100,11 @@ public class InventoryItem {
      *
      * @param quantity the new available quantity; must not be negative,
      *                  but may be zero (a legitimate out-of-stock count)
-     * @throws IllegalArgumentException if {@code quantity} is negative
+     * @throws InvalidQuantityException if {@code quantity} is negative
      */
     public void adjust(int quantity) {
         if (quantity < 0) {
-            throw new IllegalArgumentException("Quantity to adjust must not be negative");
+            throw new InvalidQuantityException("Quantity to adjust must not be negative");
         }
         available = quantity;
     }

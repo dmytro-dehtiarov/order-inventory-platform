@@ -50,7 +50,7 @@ public class InventoryItemTest {
 
     @Test
     public void shouldThrowWhenAvailableIsNegative() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new InventoryItem(1L, -1));
+        Assertions.assertThrows(InvalidQuantityException.class, () -> new InventoryItem(1L, -1));
     }
 
     @Test
@@ -66,16 +66,16 @@ public class InventoryItemTest {
 
     @Test
     public void shouldThrowWhenReserveNegativeQuantity() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> item.reserve(-1));
+        Assertions.assertThrows(InvalidQuantityException.class, () -> item.reserve(-1));
     }
 
     @Test
     public void shouldThrowWhenReleaseNegativeQuantity() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> item.release(-1));
+        Assertions.assertThrows(InvalidQuantityException.class, () -> item.release(-1));
     }
 
     @Test
     public void shouldThrowWhenAdjustNegativeQuantity() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> item.adjust(-1));
+        Assertions.assertThrows(InvalidQuantityException.class, () -> item.adjust(-1));
     }
 }
